@@ -1,0 +1,17 @@
+# Node.jsのモジュール
+/node_modules/
+
+# TypeScriptビルドファイル
+/dist/
+/build/
+/*.tsbuildinfo
+
+# 環境設定ファイル（APIキーやDB設定）
+.env
+
+# macOSのシステムファイル
+.DS_Store
+
+# VSCode設定ファイル（個人設定なので共有不要）
+.vscode/
+

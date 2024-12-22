@@ -32,3 +32,29 @@
   border-radius: 5px;
   text-align: center;
 }
+
+.button-osikomi {
+  @apply overflow-hidden transition-all duration-100 active:translate-x-1 active:translate-y-1 active:shadow-none;
+}
+
+.button-primary {
+  @apply bg-button text-base font-bold mt-4 py-2 px-4 text-white border-X border-black rounded-xl shadow-B button-osikomi}
+
+.button-secondary {
+  @apply  text-black text-base font-bold mt-4 py-2 px-4 border-X border-black rounded-2xl shadow-B overflow-hidden transition-all duration-100 active:translate-x-1 active:translate-y-1 active:shadow-none;
+}
+
+/* Progress bar's track (背景部分) */
+progress::-webkit-progress-bar {
+  background-color: #f5f5f5;
+  border-radius: 16px;
+  border:solid 3px;
+  overflow: hidden;
+}
+
+/* Progress bar's value (進捗部分) */
+progress::-webkit-progress-value {
+  background-color: #A4A1D7;
+  border-radius: 0px;
+  border:solid px;
+}

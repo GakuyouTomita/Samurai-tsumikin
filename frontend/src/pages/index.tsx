@@ -10,54 +10,51 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null); // エラー状態を管理するためのステート
   const router = useRouter();
-  console.log(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`);
+
   const handleLogin = async () => {
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, { // 環境変数を使用
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
         username,
         password
       });
+      console.log("Login response:", response);  // レスポンスの内容を確認
       console.log(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`);
       localStorage.setItem('token', response.data.token);
-      router.push('/dashboard'); //ログイン後の飛び先ページ
+      router.push('/partselect'); //ログイン後の飛び先ページ
     } catch (err) {
-      setError('Invalid credentials'); // エラーメッセージをステートにセット
+      setError('ログインできませんでした'); // エラーメッセージをステートにセット
       console.error((err as Error).message); // エラーの詳細をコンソールに出力
     }
   };
 
   return (
-    <div className="min-h-screen bg-bg flex flex-col items-center justify-start gap-4 pt-40">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-bg ">
+      <div className="flex flex-col items-center justify-center gap-4 w-full max-w-[414px] mt-24 bg-bgbg h-[600px] border-X border-black1 rounded-2xl">
 
-      <div className="grid grid-cols-2 grid-rows-3 gap-x-2 gap-y-1 group cursor-pointer">
-        <div className="border-X border-black w-32 h-12 bg-fukkin"></div>
-        <div className="border-X border-black w-24 h-12 bg-kyoukin"></div>
-        <div className="border-X border-black w-24 h-12 bg-ude justify-self-end"></div>
-        <div className="border-X border-black w-32 h-12 bg-kata"></div>
-        <div className="border-X border-black w-24 h-12 bg-kahanshin justify-self-end"></div>
-        <div className="border-X border-black w-32 h-12 bg-green1"></div>
+        <div className="font-black text-6xl my-12">TSUMIKIN</div>
+        <input
+          className="py-3 px-2 border-X border-black rounded-2xl shadow-X"
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          className="py-3 px-2 border-X border-black rounded-2xl shadow-X"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button
+          className=" text-white px-8 py-4 mt-2 font-bold border-X border-black rounded-2xl shadow-B button-osikomi bg-button"
+          onClick={handleLogin}>ログイン</button>
+        {error && <p style={{ color: 'red' }}>{error}</p>} {/* エラーメッセージを表示 */}
+
+        <p className=""></p>
       </div>
-      <div className="font-medium text-4xl mt-12 mb-4">積みトレ</div>
-      <input
-        className="py-3 px-2 border-X border-black rounded-2xl shadow-X"
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        className="py-3 px-2 border-X border-black rounded-2xl shadow-X"
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button
-        className="bg-green1 text-lg text-black px-10 py-3 font-bold mt-2 border-X border-black rounded-2xl shadow-X"
-        onClick={handleLogin}>ログイン</button>
-
-      {error && <p style={{ color: 'red' }}>{error}</p>} {/* エラーメッセージを表示 */}
     </div>
+
 
   );
 }
